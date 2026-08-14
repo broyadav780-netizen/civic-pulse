@@ -1,0 +1,2 @@
+# Production build output is generated from the application source.
+dist/** linguist-generated=true
