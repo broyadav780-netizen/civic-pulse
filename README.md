@@ -1,4 +1,4 @@
-# CivicPulse - Shivank's Citizen Frontend
+# CivicPulse -  Frontend
 
 This is the citizen-facing React + Tailwind prototype for the CivicPulse hackathon. It intentionally contains no backend implementation.
 
