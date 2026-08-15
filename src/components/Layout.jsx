@@ -1,5 +1,6 @@
-import { NavLink } from 'react-router-dom'
-import { Home, FilePlus2, ClipboardList, Menu, X } from 'lucide-react'
+import { Link, NavLink } from 'react-router-dom'
+import { Home, FilePlus2, ClipboardList, LogOut, Menu, ShieldCheck, X } from 'lucide-react'
 import { useState } from 'react'
+import { useAuth } from '../auth/AuthContext'
 const links = [{to:'/', label:'Home', icon:Home},{to:'/report',label:'Report issue',icon:FilePlus2},{to:'/reports',label:'My reports',icon:ClipboardList}]
-export default function Layout({ children }) { const [open,setOpen]=useState(false); return <><header><NavLink to="/" className="brand">Civic<span>Pulse</span></NavLink><button className="menu-button" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><nav className={open?'open':''}>{links.map(({to,label,icon:Icon})=><NavLink end={to==='/' } to={to} key={to} onClick={()=>setOpen(false)}><Icon size={18}/>{label}</NavLink>)}</nav></header><main>{children}</main></> }
+export default function Layout({ children }) { const [open,setOpen]=useState(false); const { citizen, signOut } = useAuth(); return <><header><NavLink to="/" className="brand"><span className="brand-mark">CP</span>CivicPulse</NavLink><button className="menu-button" onClick={()=>setOpen(!open)}>{open?<X/>:<Menu/>}</button><nav className={open?'open':''}>{links.map(({to,label,icon:Icon})=><NavLink end={to==='/' } to={to} key={to} onClick={()=>setOpen(false)}><Icon size={17}/>{label}</NavLink>)}</nav>{citizen ? <div className="account"><span className="avatar">{citizen.name.slice(0,1).toUpperCase()}</span><span className="account-name">{citizen.name}</span><button title="Sign out" className="sign-out" onClick={signOut}><LogOut size={17}/></button></div> : <Link className="login-link" to="/login"><ShieldCheck size={16}/> Citizen login</Link>}</header><main>{children}</main></> }
